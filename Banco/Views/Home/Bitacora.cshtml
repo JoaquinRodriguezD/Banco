@@ -1,0 +1,29 @@
+﻿@model List<Banco.Models.TableViewModels.BitacoraTableViewModel>
+@{
+    ViewBag.Title = "Bitcora";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered" style="border:solid; border-collapse:collapse; border-color:black;">
+            <tr style="background-color: #ffffff">
+                <th>Tipo</th>
+                <th>Fecha y hora</th>
+                <th>Monto</th>
+                <th>Respuesta</th>
+            </tr>
+            @foreach (var oElement in Model)
+            {
+                <tr style="background-color: #ffffff">
+                    <td>@oElement.Tipo</td>
+                    <td>@oElement.Fecha_hora</td>
+                    <td>@oElement.Monto</td>
+                    <td>@oElement.Estado</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

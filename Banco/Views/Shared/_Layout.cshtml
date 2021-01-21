@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - BancoMex</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link href="~/CSS/StyleSheet.css" rel="stylesheet" />
+    <style>
+        footer {
+            height: inherit;
+            width: inherit;
+            text-align: justify;
+            padding: 3px;
+            background-color: #49b1d3;
+            color: white;
+        }
+    </style>
+    <script src="~/Js/Validations.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                @Html.ActionLink("BancoMex", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Bitacora", "Bitacora", "Home")</li>
+                    <li>@Html.ActionLink("Deposito", "Deposito", "Home")</li>
+                    <li>@Html.ActionLink("Retiro", "Retiro", "Home")</li>
+                    <li>@Html.ActionLink("Transferencia", "Transferencia", "Home")</li>
+                    <li>@Html.ActionLink("Cerrar sesión", "Logoff", "Close")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+
+        @RenderBody()
+        <hr />
+
+        <footer>
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+                  integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
+                  crossorigin="anonymous">
+            <section class="footers bg-light pt-5 pb-3">
+                <div class="container pt-5">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-4 footers-one">
+                            <div class="footers-logo">
+                                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.glassdoor.com%2Fsqll%2F692842%2Fbanco-de-m%25C3%25A9xico-squarelogo-1464608973325.png&f=1&nofb=1"
+                                     alt="Logo"
+                                     style="width:120px;">
+                            </div>
+                            <div class="footers-info mt-3">
+                                <p>BancoMex</p>
+                            </div>
+                            <div class="social-icons">
+                                <a href="https://www.facebook.com/">
+                                    <i id="social-fb"
+                                       class="fa fa-facebook-square fa-2x social"></i>
+                                </a>
+                                <a href="https://twitter.com/">
+                                    <i id="social-tw"
+                                       class="fa fa-twitter-square fa-2x social"></i>
+                                </a>
+                                <a href="https://www.gmail.com/">
+                                    <i id="social-gp"
+                                       class="fa fa-google-plus-square fa-2x social"></i>
+                                </a>
+                                <a href="https://www.outlook.com">
+                                    <i id="social-em"
+                                       class="fa fa-envelope-square fa-2x social"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-2 footers-two">
+                            <h5>Acerca del banco </h5>
+                            <ul class="list-unstyled">
+                                <li><a href="maintenance.html">Inversionistas</a></li>
+                                <li><a href="contact.html">Sala de comunicación</a></li>
+                                <li><a href="about.html">Banca responsable</a></li>
+                                <li><a href="about.html">Educación Financiera</a></li>
+                                <li><a href="about.html">Títulos</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-2 footers-three">
+                            <h5>Regulación</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="maintenance.html">Aviso Legal</a></li>
+                                <li><a href="contact.html">Trasnparencia</a></li>
+                                <li><a href="about.html">Comisionistas</a></li>
+                                <li><a href="about.html">Biométricos</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-2 footers-four">
+                            <h5>Ayuda </h5>
+                            <ul class="list-unstyled">
+                                <li><a href="maintenance.html">Quejas, sugerencias</a></li>
+                                <li><a href="contact.html">Tips infraude</a></li>
+                                <li><a href="about.html">Negocioaciones</a></li>
+                                <li><a href="about.html">Búro</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div><a href="#top">Regresar hacia arriba</a></div>
+                <br>
+            </section>
+            <section class="disclaimer bg-light border">
+                <div class="container">
+                    <div class="row ">
+                        <div class="col-md-12 py-2">
+                            <small>
+                                Aviso legal: BancoMex es solo un intermediario que ofrece su plataforma a facilitar
+                                las transacciones entre el Vendedor y el Cliente / Comprador / Usuario y no es ni
+                                puede ser un partido o controlar de cualquier manera cualquier transacción entre el Vendedor y el
+                                Cliente / Comprador / Usuario. Se han ampliado todas las ofertas y descuentos de este
+                                Sitio Web por varios Constructores / Desarrolladores que han anunciado sus productos. El elemento
+                                es solo comunicar las ofertas y no vender ni prestar ninguno de esos productos o
+                                servicios. No garantiza ni hace ninguna representación con respecto a la oferta (s)
+                                hecho en el sitio. Element Limited no será responsable ni estará obligado a mediar o
+                                resolver cualquier disputa o desacuerdo entre el Cliente / Comprador / Usuario y el Vendedor y
+                                ambos El vendedor y el cliente / comprador / usuario resolverán todas estas disputas sin
+                                involucrar Elemento Limitado de cualquier manera.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="copyright border">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-md-12 pt-3">
+                            <p class="text-muted">
+                                © Derechos Reservados &copy; @DateTime.Now.Year -
+                                BancoMex México S.A., Institución de Banca Múltiple,
+                                Grupo Financiero BancoMex México.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

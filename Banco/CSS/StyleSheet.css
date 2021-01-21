@@ -1,0 +1,27 @@
+﻿body {
+    background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.istockphoto.com%2Fphotos%2Fhotel-lobby-blur-background-banquet-hall-interior-view-of-luxurious-picture-id990877026%3Fb%3D1%26k%3D6%26m%3D990877026%26s%3D170667a%26w%3D0%26h%3DHWIo5XZYV4lUOVEGyXjV7rPuUJdtByfX2WmCvUdsJ6A%3D&f=1&nofb=1');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#divRight {
+    background-color: rgba(236, 236, 255, 0.81);
+    height: 550px;
+    width: 330px;
+    display: grid;
+    align-content: center;
+    padding-left: 100px;
+}
+
+.fa {
+    color: black;
+    font-size: 27px;
+    margin-left: 8px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<h1>Te damos la Bienvenida al Banco BancoMex</h1>
+
+<div class="row">
+    <div id="divLeft" class="col-sm-4 text-justify">
+        <h3>
+            Con mayor frecuencia transacciones bancarias se realizan de forma remota,
+            ya sea a través del equipo de computo o de apicaciones móviles. Por eso, utilizamos
+            sistemas y protocolos de seguridad que protegen tus cuentas, tarjetas
+            y toda tu información.
+        </h3>
+    </div>
+    <div id="divRight">
+        <div id="formDiv" class="row">
+            <h2 class="center-block">Login</h2>
+            <form id="frm">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <label>
+                        Número de cuenta:
+                        <input type="text" name="No_cuenta" onkeypress="return isNumberKey(event, this)" required />
+                    </label>
+                    <label>
+                        Nip:
+                        <i id="pass-status" class="fa fa-eye" aria-hidden="true" onClick="viewPassword()"></i>
+                        <input type="password" id="nip" name="Nip" onkeypress="return isNumberKey(event, this)" required />
+                    </label>
+                    <div class="text-center">
+                        Eres nuevo? Registrate @Html.ActionLink("aquí", "Create", "Cliente")
+                    </div>
+                    <p></p>
+                    <input type="submit" class="btn btn-primary center-block" value="Ingresar" style="" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-3" id="inicio">
+        <h2>Seguridad</h2>
+        <p class="text-justify">
+            La combinación de usuario y clave protegen el área privada del sitio Internet,
+        </p>
+    </div>
+    <div class="col-sm-3" id="inicio">
+        <h2>¿Cuáles son los fraudes más frecuentes?</h2>
+        <h4>Pishing:</h4>
+        <p class="text-justify">
+            Se refiere a la suplantación de identidad en el que el ciberdelincuente se hace pasar por
+            una persona o entidad para adquirir información de forma fraudulenta como contraseñas o información
+            sobre tarjetas de crédito. Generalmente se comunican por medio de correo electrónico, invitando a la víctima
+            a que se dirija a un sitio web falso de la entidad para robar sus datos.
+        </p>
+    </div>
+    <div class="col-sm-3" id="inicio">
+        <h2>Cómo evitarlo:</h2>
+        <p class="text-justify">
+            Digita tú mismo la dirección de la entidad bancaria y en caso de recibir llamadas sospechosas o correos electrónicos,
+            comunícate con tu banco para confirmar la información. Evita dar datos por mensajes de texto y no creas en rifas
+            o regalos. Si no has participado en ningún concurso, ¿por qué crees que vas a ganar algo de la nada? No abras páginas
+            web desde mensajes sospechosos.
+        </p>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+    $(document).ready(function(){
+
+        $("#frm").submit(function (e) {
+
+            e.preventDefault();
+
+            url = "@Url.Content("~/Access/Enter")"
+            parametros = $(this).serialize();
+
+            $.post(url, parametros, function (data){
+
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/")";
+                } else {
+                    alert(data)
+                }
+
+            })
+
+        })
+    })
+    </script>
+}
+
+<link href="~/CSS/Login.css" rel="stylesheet" />
+<script src="~/Js/Validations.js"></script>

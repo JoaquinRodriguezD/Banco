@@ -1,0 +1,45 @@
+﻿body {
+    background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fnews.efinancialcareers.com%2Fbinaries%2Fcontent%2Fgallery%2Fefinancial-careers%2Farticles%2Fgraduate-guide%2FThinkstockPhotos-471605229.jpg&f=1&nofb=1');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#formDiv {
+    background-color: rgba(236, 236, 255, 0.75);
+    height: 300px;
+    width: 370px;
+    display: grid;
+    align-items: center;
+}
+
+#divLeft{
+    background: rgba(240, 255, 255, 0.35)
+}
+
+#divRight {
+    margin-left: auto;
+    margin-right: 0;
+    height: 350px;
+    width: 400px;
+}
+
+#inicio {
+    background: rgba(240, 255, 255, 0.35);
+    margin-top: 20px;
+    margin-right: 97px;
+    height: 370px;
+}
+
+.fa {
+    color: black;
+    font-size: 27px;
+    margin-left: 8px;
+    margin-right:10px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
