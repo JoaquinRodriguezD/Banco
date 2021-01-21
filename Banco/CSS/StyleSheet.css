@@ -1,0 +1,19 @@
+﻿body {
+    background: #0087ff;
+}
+
+tbody {
+    background: #ffffff;
+    border: blue 2px solid;
+    border-collapse: collapse;
+}
+
+tr {
+    background-color: white;
+    color: black;
+}
+
+.login {
+    background: #ffffff;
+    border: blue 2px solid;
+}

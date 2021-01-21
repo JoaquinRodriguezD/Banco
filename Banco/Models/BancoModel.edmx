@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BancoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bitacora">
+          <Key>
+            <PropertyRef Name="no_movimiento" />
+          </Key>
+          <Property Name="no_movimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fecha_hora" Type="datetime" Nullable="false" />
+          <Property Name="monto" Type="int" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="no_cuenta" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="id_cliente" />
+          </Key>
+          <Property Name="id_cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_cliente" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="a_paterno" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="a_materno" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fecha_nacimiento" Type="date" Nullable="false" />
+          <Property Name="no_cuenta" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cuenta">
+          <Key>
+            <PropertyRef Name="no_cuenta" />
+          </Key>
+          <Property Name="no_cuenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nip" Type="int" Nullable="false" />
+          <Property Name="saldo" Type="int" />
+          <Property Name="fecha_creacion" Type="datetime" />
+          <Property Name="fecha_actualizacion" Type="datetime" />
+          <Property Name="token" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="fk_cuenta">
+          <End Role="cuenta" Type="Self.cuenta" Multiplicity="1" />
+          <End Role="cliente" Type="Self.cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cuenta">
+              <PropertyRef Name="no_cuenta" />
+            </Principal>
+            <Dependent Role="cliente">
+              <PropertyRef Name="no_cuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_cuenta2">
+          <End Role="cuenta" Type="Self.cuenta" Multiplicity="1" />
+          <End Role="bitacora" Type="Self.bitacora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cuenta">
+              <PropertyRef Name="no_cuenta" />
+            </Principal>
+            <Dependent Role="bitacora">
+              <PropertyRef Name="no_cuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="borrar_cliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="no_cuenta" Type="int" Mode="In" />
+        </Function>
+        <Function Name="deposito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="no_cuenta" Type="int" Mode="In" />
+          <Parameter Name="monto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ingresar_cliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="apellido_p" Type="varchar" Mode="In" />
+          <Parameter Name="apellido_m" Type="varchar" Mode="In" />
+          <Parameter Name="telefono_cliente" Type="varchar" Mode="In" />
+          <Parameter Name="fecha_nacimiento" Type="date" Mode="In" />
+          <Parameter Name="nip" Type="int" Mode="In" />
+        </Function>
+        <Function Name="retiro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="no_cuenta" Type="int" Mode="In" />
+          <Parameter Name="monto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="transferencia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="no_cuenta" Type="int" Mode="In" />
+          <Parameter Name="no_cuenta2" Type="int" Mode="In" />
+          <Parameter Name="monto" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="BancoModelStoreContainer">
+          <EntitySet Name="bitacora" EntityType="Self.bitacora" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cuenta" EntityType="Self.cuenta" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_cuenta" Association="Self.fk_cuenta">
+            <End Role="cuenta" EntitySet="cuenta" />
+            <End Role="cliente" EntitySet="cliente" />
+          </AssociationSet>
+          <AssociationSet Name="fk_cuenta2" Association="Self.fk_cuenta2">
+            <End Role="cuenta" EntitySet="cuenta" />
+            <End Role="bitacora" EntitySet="bitacora" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BancoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="bitacora">
+          <Key>
+            <PropertyRef Name="no_movimiento" />
+          </Key>
+          <Property Name="no_movimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_hora" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="monto" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="no_cuenta" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cuenta" Relationship="Self.fk_cuenta2" FromRole="bitacora" ToRole="cuenta" />
+        </EntityType>
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="id_cliente" />
+          </Key>
+          <Property Name="id_cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="a_paterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="a_materno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="no_cuenta" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cuenta" Relationship="Self.fk_cuenta" FromRole="cliente" ToRole="cuenta" />
+        </EntityType>
+        <EntityType Name="cuenta">
+          <Key>
+            <PropertyRef Name="no_cuenta" />
+          </Key>
+          <Property Name="no_cuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nip" Type="Int32" Nullable="false" />
+          <Property Name="saldo" Type="Int32" />
+          <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+          <Property Name="fecha_actualizacion" Type="DateTime" Precision="3" />
+          <Property Name="token" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="bitacora" Relationship="Self.fk_cuenta2" FromRole="cuenta" ToRole="bitacora" />
+          <NavigationProperty Name="cliente" Relationship="Self.fk_cuenta" FromRole="cuenta" ToRole="cliente" />
+        </EntityType>
+        <Association Name="fk_cuenta2">
+          <End Role="cuenta" Type="Self.cuenta" Multiplicity="1" />
+          <End Role="bitacora" Type="Self.bitacora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cuenta">
+              <PropertyRef Name="no_cuenta" />
+            </Principal>
+            <Dependent Role="bitacora">
+              <PropertyRef Name="no_cuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_cuenta">
+          <End Role="cuenta" Type="Self.cuenta" Multiplicity="1" />
+          <End Role="cliente" Type="Self.cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cuenta">
+              <PropertyRef Name="no_cuenta" />
+            </Principal>
+            <Dependent Role="cliente">
+              <PropertyRef Name="no_cuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BancoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bitacora" EntityType="Self.bitacora" />
+          <EntitySet Name="cliente" EntityType="Self.cliente" />
+          <EntitySet Name="cuenta" EntityType="Self.cuenta" />
+          <AssociationSet Name="fk_cuenta2" Association="Self.fk_cuenta2">
+            <End Role="cuenta" EntitySet="cuenta" />
+            <End Role="bitacora" EntitySet="bitacora" />
+          </AssociationSet>
+          <AssociationSet Name="fk_cuenta" Association="Self.fk_cuenta">
+            <End Role="cuenta" EntitySet="cuenta" />
+            <End Role="cliente" EntitySet="cliente" />
+          </AssociationSet>
+          <FunctionImport Name="borrar_cliente">
+            <Parameter Name="no_cuenta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="deposito">
+            <Parameter Name="no_cuenta" Mode="In" Type="Int32" />
+            <Parameter Name="monto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ingresar_cliente">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="apellido_p" Mode="In" Type="String" />
+            <Parameter Name="apellido_m" Mode="In" Type="String" />
+            <Parameter Name="telefono_cliente" Mode="In" Type="String" />
+            <Parameter Name="fecha_nacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="nip" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="retiro">
+            <Parameter Name="no_cuenta" Mode="In" Type="Int32" />
+            <Parameter Name="monto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="transferencia">
+            <Parameter Name="no_cuenta" Mode="In" Type="Int32" />
+            <Parameter Name="no_cuenta2" Mode="In" Type="Int32" />
+            <Parameter Name="monto" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BancoModelStoreContainer" CdmEntityContainer="BancoEntities">
+          <EntitySetMapping Name="bitacora">
+            <EntityTypeMapping TypeName="BancoModel.bitacora">
+              <MappingFragment StoreEntitySet="bitacora">
+                <ScalarProperty Name="no_movimiento" ColumnName="no_movimiento" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="fecha_hora" ColumnName="fecha_hora" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="no_cuenta" ColumnName="no_cuenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cliente">
+            <EntityTypeMapping TypeName="BancoModel.cliente">
+              <MappingFragment StoreEntitySet="cliente">
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="nom_cliente" ColumnName="nom_cliente" />
+                <ScalarProperty Name="a_paterno" ColumnName="a_paterno" />
+                <ScalarProperty Name="a_materno" ColumnName="a_materno" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="no_cuenta" ColumnName="no_cuenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cuenta">
+            <EntityTypeMapping TypeName="BancoModel.cuenta">
+              <MappingFragment StoreEntitySet="cuenta">
+                <ScalarProperty Name="no_cuenta" ColumnName="no_cuenta" />
+                <ScalarProperty Name="nip" ColumnName="nip" />
+                <ScalarProperty Name="saldo" ColumnName="saldo" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="fecha_actualizacion" ColumnName="fecha_actualizacion" />
+                <ScalarProperty Name="token" ColumnName="token" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="borrar_cliente" FunctionName="BancoModel.Store.borrar_cliente" />
+          <FunctionImportMapping FunctionImportName="deposito" FunctionName="BancoModel.Store.deposito" />
+          <FunctionImportMapping FunctionImportName="ingresar_cliente" FunctionName="BancoModel.Store.ingresar_cliente" />
+          <FunctionImportMapping FunctionImportName="retiro" FunctionName="BancoModel.Store.retiro" />
+          <FunctionImportMapping FunctionImportName="transferencia" FunctionName="BancoModel.Store.transferencia" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
