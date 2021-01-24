@@ -42,5 +42,21 @@ namespace Banco.Controllers
                 return Content("Error: " + ex.Message);
             }
         }
+
+        // GET: CreateCliente
+        public ActionResult CreateCliente()
+        {
+            return View();
+        }
+
+        // POST: CreateCliente
+        [HttpPost]
+        public ActionResult CreateCliente(string nom_cliente, string a_paterno, string a_materno, string telefono, DateTime fecha_nacimiento, int nip)
+        {
+            BancoEntities db = new BancoEntities();
+            db.ingresar_cliente(nom_cliente, a_paterno, a_materno, telefono, fecha_nacimiento, nip);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Access");
+        }
     }
 }

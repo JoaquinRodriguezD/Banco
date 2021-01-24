@@ -10,18 +10,17 @@ using Banco.Models;
 
 namespace Banco.Controllers
 {
-    public class ClienteController : Controller
+    public class clientesController : Controller
     {
         private BancoEntities db = new BancoEntities();
 
-        // GET: Cliente
+        // GET: clientes
         public ActionResult Index()
         {
-            var cliente = db.cliente.Include(c => c.cuenta);
-            return View(cliente.ToList());
+            return View(db.cliente.ToList());
         }
 
-        // GET: Cliente/Details/5
+        // GET: clientes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,24 +35,28 @@ namespace Banco.Controllers
             return View(cliente);
         }
 
-        // GET: Cliente/Create
+        // GET: clientes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Cliente/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: clientes/Create
         [HttpPost]
-        public ActionResult Create(string nom_cliente, string a_paterno, string a_materno, string telefono, DateTime fecha_nacimiento, int nip)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "id_cliente,nom_cliente,a_paterno,a_materno,telefono,fecha_nacimiento")] cliente cliente)
         {
-            db.ingresar_cliente(nom_cliente, a_paterno, a_materno, telefono, fecha_nacimiento, nip);
-            db.SaveChanges();
-            return RedirectToAction("Index","Access");
+            if (ModelState.IsValid)
+            {
+                db.cliente.Add(cliente);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(cliente);
         }
 
-        // GET: Cliente/Edit/5
+        // GET: clientes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -65,16 +68,13 @@ namespace Banco.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.no_cuenta = new SelectList(db.cuenta, "no_cuenta", "token", cliente.no_cuenta);
             return View(cliente);
         }
 
-        // POST: Cliente/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: clientes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_cliente,nom_cliente,a_paterno,a_materno,telefono,fecha_nacimiento,no_cuenta")] cliente cliente)
+        public ActionResult Edit([Bind(Include = "id_cliente,nom_cliente,a_paterno,a_materno,telefono,fecha_nacimiento")] cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -82,11 +82,10 @@ namespace Banco.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.no_cuenta = new SelectList(db.cuenta, "no_cuenta", "token", cliente.no_cuenta);
             return View(cliente);
         }
 
-        // GET: Cliente/Delete/5
+        // GET: clientes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -101,7 +100,7 @@ namespace Banco.Controllers
             return View(cliente);
         }
 
-        // POST: Cliente/Delete/5
+        // POST: clientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

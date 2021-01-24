@@ -20,7 +20,6 @@ namespace Banco.Models
         public string a_materno { get; set; }
         public string telefono { get; set; }
         public System.DateTime fecha_nacimiento { get; set; }
-        public int no_cuenta { get; set; }
     
         public virtual cuenta cuenta { get; set; }
     }

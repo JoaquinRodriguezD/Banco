@@ -19,7 +19,6 @@ namespace Banco.Models
         public System.DateTime fecha_hora { get; set; }
         public int monto { get; set; }
         public string estado { get; set; }
-        public int no_cuenta { get; set; }
     
         public virtual cuenta cuenta { get; set; }
     }
