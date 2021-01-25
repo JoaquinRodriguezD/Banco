@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Net;
 using Banco.Filters;
 using Banco.Models;
 
@@ -56,21 +57,40 @@ namespace Banco.Controllers
             db.ingresar_cliente(nom_cliente, a_paterno, a_materno, telefono, fecha_nacimiento, nip);
             db.SaveChanges();
 
-            var lst = from d in db.cuenta
-                      where d.nip == nip
+            var lst = from d in db.cliente
+                      where d.nom_cliente == nom_cliente && d.a_paterno == a_paterno
+                      && d.a_materno == a_materno && d.telefono == telefono
+                      && d.fecha_nacimiento == fecha_nacimiento
                       select d;
             try
             {
-                cuenta oUser = lst.First();
+                cliente oUser = lst.First();
                 Session["cliente_nuevo"] = oUser;
-                return Content("1");
             }
             catch(Exception e)
             {
                 Console.WriteLine("error" + e);
             }
 
-            return RedirectToAction("Index", "Access");
+            return RedirectToAction("Details", "Access");
+        }
+
+        //GET Detalles de nuevo cliente
+        public ActionResult Details()
+        {
+            BancoEntities db = new BancoEntities();
+            var oUser = (cliente)HttpContext.Session["cliente_nuevo"];
+            int? id = oUser.id_cliente;
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            cliente cliente = db.cliente.Find(id);
+            if (cliente == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cliente);
         }
     }
 }

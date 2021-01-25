@@ -14,6 +14,13 @@ namespace Banco.Controllers
         private readonly BancoEntities banco = new BancoEntities();
         public ActionResult Index()
         {
+            BancoEntities db = new BancoEntities();
+            var oUser = (cuenta)HttpContext.Session["user"];
+            var lst = from d in db.cliente
+                      where d.no_cuenta == oUser.no_cuenta
+                      select d;
+            cliente oUseraux = lst.First();
+            ViewBag.Nombre = oUseraux.nom_cliente;
             return View();
         }
 
@@ -43,6 +50,8 @@ namespace Banco.Controllers
         // GET: Deposito
         public ActionResult Deposito()
         {
+            var oUser = (cuenta)HttpContext.Session["user"];
+            ViewBag.num = oUser.no_cuenta;
             return View();
         }
 
@@ -60,6 +69,8 @@ namespace Banco.Controllers
         // GET: Retiro
         public ActionResult Retiro()
         {
+            var oUser = (cuenta)HttpContext.Session["user"];
+            ViewBag.num = oUser.no_cuenta;
             return View();
         }
         // POST: Retiro
@@ -76,6 +87,8 @@ namespace Banco.Controllers
         // GET: Transferencia
         public ActionResult Transferencia()
         {
+            var oUser = (cuenta)HttpContext.Session["user"];
+            ViewBag.num = oUser.no_cuenta;
             return View();
         }
         // POST: Transferencia

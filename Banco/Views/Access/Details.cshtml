@@ -1,0 +1,67 @@
+﻿@model Banco.Models.cliente
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<h2>Datos personales</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom_cliente)
+        </dd>
+
+        <dt>
+            Apellido paterno
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.a_paterno)
+        </dd>
+
+        <dt>
+            Apellido materno
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.a_materno)
+        </dd>
+
+        <dt>
+            Teléfono
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefono)
+        </dd>
+
+        <dt>
+            Fecha de nacimiento
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_nacimiento)
+        </dd>
+
+        <dt>
+            Número de cuenta
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cuenta.no_cuenta)
+        </dd>
+
+    </dl>
+</div>
+<div style="margin-left:300px">
+    @Html.ActionLink("Ingresar", "Index", "Access")
+</div>
+
+<link href="~/CSS/StyleSheet.css" rel="stylesheet" />

@@ -226,9 +226,9 @@
     <Content Include="Views\Access\CreateCliente.cshtml" />
     <Content Include="Views\clientes\Create.cshtml" />
     <Content Include="Views\clientes\Delete.cshtml" />
-    <Content Include="Views\clientes\Details.cshtml" />
-    <Content Include="Views\clientes\Edit.cshtml" />
+    <Content Include="Views\Access\Details.cshtml" />
     <Content Include="Views\clientes\Index.cshtml" />
+    <Content Include="Views\clientes\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

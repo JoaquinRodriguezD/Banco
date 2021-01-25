@@ -25,3 +25,10 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+#divs {
+    background: rgba(240, 255, 255, 0.35);
+    margin-top: 20px;
+    margin: 0 auto;
+    height: 370px;
+}
