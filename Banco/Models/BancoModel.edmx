@@ -139,7 +139,7 @@
             <End Role="cuenta" EntitySet="cuenta" />
             <End Role="cliente" EntitySet="cliente" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="bitacora">
           <Key>
             <PropertyRef Name="no_movimiento" />
@@ -149,6 +149,7 @@
           <Property Name="fecha_hora" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="monto" Type="Int32" Nullable="false" />
           <Property Name="estado" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="no_cuenta" Type="Int32" Nullable="false" />
           <NavigationProperty Name="cuenta" Relationship="BancoModel.fk_cuenta2" FromRole="bitacora" ToRole="cuenta" />
         </EntityType>
         <EntityType Name="cliente">
@@ -161,6 +162,7 @@
           <Property Name="a_materno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="telefono" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="fecha_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="no_cuenta" Type="Int32" Nullable="false" />
           <NavigationProperty Name="cuenta" Relationship="BancoModel.fk_cuenta" FromRole="cliente" ToRole="cuenta" />
         </EntityType>
         <EntityType Name="cuenta">
@@ -178,12 +180,28 @@
         <Association Name="fk_cuenta2">
           <End Type="BancoModel.cuenta" Role="cuenta" Multiplicity="1" />
           <End Type="BancoModel.bitacora" Role="bitacora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cuenta">
+              <PropertyRef Name="no_cuenta" />
+            </Principal>
+            <Dependent Role="bitacora">
+              <PropertyRef Name="no_cuenta" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <Association Name="fk_cuenta">
           <End Type="BancoModel.cuenta" Role="cuenta" Multiplicity="1" />
           <End Type="BancoModel.cliente" Role="cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cuenta">
+              <PropertyRef Name="no_cuenta" />
+            </Principal>
+            <Dependent Role="cliente">
+              <PropertyRef Name="no_cuenta" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -197,6 +215,7 @@
           <EntitySetMapping Name="bitacora">
             <EntityTypeMapping TypeName="BancoModel.bitacora">
               <MappingFragment StoreEntitySet="bitacora">
+                <ScalarProperty Name="no_cuenta" ColumnName="no_cuenta" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="monto" ColumnName="monto" />
                 <ScalarProperty Name="fecha_hora" ColumnName="fecha_hora" />
@@ -208,6 +227,7 @@
           <EntitySetMapping Name="cliente">
             <EntityTypeMapping TypeName="BancoModel.cliente">
               <MappingFragment StoreEntitySet="cliente">
+                <ScalarProperty Name="no_cuenta" ColumnName="no_cuenta" />
                 <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="a_materno" ColumnName="a_materno" />
@@ -228,23 +248,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="fk_cuenta2" TypeName="BancoModel.fk_cuenta2" StoreEntitySet="bitacora">
-            <EndProperty Name="bitacora">
-              <ScalarProperty Name="no_movimiento" ColumnName="no_movimiento" />
-            </EndProperty>
-            <EndProperty Name="cuenta">
-              <ScalarProperty Name="no_cuenta" ColumnName="no_cuenta" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="fk_cuenta" TypeName="BancoModel.fk_cuenta" StoreEntitySet="cliente">
-            <EndProperty Name="cliente">
-              <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
-            </EndProperty>
-            <EndProperty Name="cuenta">
-              <ScalarProperty Name="no_cuenta" ColumnName="no_cuenta" />
-            </EndProperty>
-          </AssociationSetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
@@ -259,7 +263,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>

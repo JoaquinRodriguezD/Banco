@@ -28,7 +28,6 @@ namespace Banco.Controllers
                     {
                         cuenta oUser = lst.First();
                         Session["user"] = oUser;
-                        ViewBag.Id = No_cuenta;
                         return Content("1");
                     }
                     else
@@ -56,6 +55,21 @@ namespace Banco.Controllers
             BancoEntities db = new BancoEntities();
             db.ingresar_cliente(nom_cliente, a_paterno, a_materno, telefono, fecha_nacimiento, nip);
             db.SaveChanges();
+
+            var lst = from d in db.cuenta
+                      where d.nip == nip
+                      select d;
+            try
+            {
+                cuenta oUser = lst.First();
+                Session["cliente_nuevo"] = oUser;
+                return Content("1");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("error" + e);
+            }
+
             return RedirectToAction("Index", "Access");
         }
     }

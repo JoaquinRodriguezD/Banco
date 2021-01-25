@@ -11,6 +11,7 @@ namespace Banco.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly BancoEntities banco = new BancoEntities();
         public ActionResult Index()
         {
             return View();
@@ -19,10 +20,13 @@ namespace Banco.Controllers
         // GET: Bitacora
         public ActionResult Bitacora()
         {
+            var oUser = (cuenta)HttpContext.Session["user"];
+            int aux = oUser.no_cuenta;
             List<BitacoraTableViewModel> lst = null;
             using (BancoEntities banco = new BancoEntities())
             {
                 lst = (from d in banco.bitacora
+                       where d.no_cuenta == aux
                        orderby d.fecha_hora
                        select new BitacoraTableViewModel
                        {
@@ -44,10 +48,10 @@ namespace Banco.Controllers
 
         // POST: Deposito
         [HttpPost]
-        public ActionResult Deposito(int ide, int sal)
+        public ActionResult Deposito(int sal)
         {
-            BancoEntities banco = new BancoEntities();
-            //ide = int.Parse((String)Session["no_cuenta"]);
+            var oUser = (cuenta)HttpContext.Session["user"];
+            int ide = oUser.no_cuenta;
             banco.deposito(ide, sal);
             banco.SaveChanges();
             return RedirectToAction("Index");
@@ -58,11 +62,12 @@ namespace Banco.Controllers
         {
             return View();
         }
-
+        // POST: Retiro
         [HttpPost]
-        public ActionResult Retiro(int ide, int sal)
+        public ActionResult Retiro(int sal)
         {
-            BancoEntities banco = new BancoEntities();
+            var oUser = (cuenta)HttpContext.Session["user"];
+            int ide = oUser.no_cuenta;
             banco.retiro(ide, sal);
             banco.SaveChanges();
             return RedirectToAction("Index");
@@ -75,9 +80,10 @@ namespace Banco.Controllers
         }
         // POST: Transferencia
         [HttpPost]
-        public ActionResult Transferencia(int ide, int ide2, int sal)
+        public ActionResult Transferencia(int ide2, int sal)
         {
-            BancoEntities banco = new BancoEntities();
+            var oUser = (cuenta)HttpContext.Session["user"];
+            int ide = oUser.no_cuenta;
             banco.transferencia(ide, ide2, sal);
             banco.SaveChanges();
             return RedirectToAction("Index");

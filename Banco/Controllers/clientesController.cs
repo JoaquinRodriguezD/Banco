@@ -17,7 +17,8 @@ namespace Banco.Controllers
         // GET: clientes
         public ActionResult Index()
         {
-            return View(db.cliente.ToList());
+            var cliente = db.cliente.Include(c => c.cuenta);
+            return View(cliente.ToList());
         }
 
         // GET: clientes/Details/5
@@ -38,13 +39,16 @@ namespace Banco.Controllers
         // GET: clientes/Create
         public ActionResult Create()
         {
+            ViewBag.no_cuenta = new SelectList(db.cuenta, "no_cuenta", "no_cuenta");
             return View();
         }
 
         // POST: clientes/Create
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_cliente,nom_cliente,a_paterno,a_materno,telefono,fecha_nacimiento")] cliente cliente)
+        public ActionResult Create([Bind(Include = "id_cliente,nom_cliente,a_paterno,a_materno,telefono,fecha_nacimiento,no_cuenta")] cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -53,6 +57,7 @@ namespace Banco.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.no_cuenta = new SelectList(db.cuenta, "no_cuenta", "no_cuenta", cliente.no_cuenta);
             return View(cliente);
         }
 
@@ -68,13 +73,16 @@ namespace Banco.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.no_cuenta = new SelectList(db.cuenta, "no_cuenta", "no_cuenta", cliente.no_cuenta);
             return View(cliente);
         }
 
         // POST: clientes/Edit/5
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_cliente,nom_cliente,a_paterno,a_materno,telefono,fecha_nacimiento")] cliente cliente)
+        public ActionResult Edit([Bind(Include = "id_cliente,nom_cliente,a_paterno,a_materno,telefono,fecha_nacimiento,no_cuenta")] cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -82,6 +90,7 @@ namespace Banco.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.no_cuenta = new SelectList(db.cuenta, "no_cuenta", "no_cuenta", cliente.no_cuenta);
             return View(cliente);
         }
 
