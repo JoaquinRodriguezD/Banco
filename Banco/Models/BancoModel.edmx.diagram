@@ -6,8 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="05ce6b69763c4a4083e939c34d8f5093" Name="Diagram1">
         <EntityTypeShape EntityType="BancoModel.bitacora" Width="1.5" PointX="0.875" PointY="1.875" />
-        <EntityTypeShape EntityType="BancoModel.cliente" Width="1.5" PointX="6" PointY="1.75" />
-        <EntityTypeShape EntityType="BancoModel.cuenta" Width="1.5" PointX="3.5" PointY="1.875" />
+        <EntityTypeShape EntityType="BancoModel.cliente" Width="1.75" PointX="6.375" PointY="1.875" />
+        <EntityTypeShape EntityType="BancoModel.cuenta" Width="2" PointX="3.5" PointY="1.875" />
         <AssociationConnector Association="BancoModel.fk_cuenta2" />
         <AssociationConnector Association="BancoModel.fk_cuenta" />
       </Diagram>
