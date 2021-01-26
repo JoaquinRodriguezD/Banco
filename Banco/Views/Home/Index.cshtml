@@ -1,35 +1,71 @@
-﻿@{
+﻿@model Banco.Models.cliente
+@{
     ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron">
     <h2>BancoMex te da la bienvenida, @ViewBag.Nombre</h2>
 </div>
-<div class="row">
-    <div class="col-sm-3" id="divs">
-        <h2>Seguridad</h2>
-        <p class="text-justify">
-            La combinación de usuario y clave protegen el área privada del sitio Internet,
-        </p>
-    </div>
-    <div class="col-sm-3" id="divs">
-        <h2>¿Cuáles son los fraudes más frecuentes?</h2>
-        <h4>Pishing:</h4>
-        <p class="text-justify">
-            Se refiere a la suplantación de identidad en el que el ciberdelincuente se hace pasar por
-            una persona o entidad para adquirir información de forma fraudulenta como contraseñas o información
-            sobre tarjetas de crédito. Generalmente se comunican por medio de correo electrónico, invitando a la víctima
-            a que se dirija a un sitio web falso de la entidad para robar sus datos.
-        </p>
-    </div>
-    <div class="col-sm-3" id="divs">
-        <h2>Cómo evitarlo:</h2>
-        <p class="text-justify">
-            Digita tú mismo la dirección de la entidad bancaria y en caso de recibir llamadas sospechosas o correos electrónicos,
-            comunícate con tu banco para confirmar la información. Evita dar datos por mensajes de texto y no creas en rifas
-            o regalos. Si no has participado en ningún concurso, ¿por qué crees que vas a ganar algo de la nada? No abras páginas
-            web desde mensajes sospechosos.
-        </p>
-    </div>
+<h2>Datos personales</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom_cliente)
+        </dd>
+
+        <dt>
+            Apellido paterno
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.a_paterno)
+        </dd>
+
+        <dt>
+            Apellido materno
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.a_materno)
+        </dd>
+
+        <dt>
+            Teléfono
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefono)
+        </dd>
+
+        <dt>
+            Fecha de nacimiento
+        </dt>
+
+        <dd>
+            @ViewBag.fecha
+        </dd>
+
+        <dt>
+            Número de cuenta
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cuenta.no_cuenta)
+        </dd>
+
+        <dt>
+            Saldo
+        </dt>
+
+        <dd>
+            @ViewBag.saldo
+        </dd>
+
+    </dl>
 </div>
 <link href="~/CSS/StyleSheet.css" rel="stylesheet" />

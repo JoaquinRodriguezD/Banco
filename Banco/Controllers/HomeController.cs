@@ -4,6 +4,7 @@ using Banco.Models.TableViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -20,8 +21,20 @@ namespace Banco.Controllers
                       where d.no_cuenta == oUser.no_cuenta
                       select d;
             cliente oUseraux = lst.First();
+            ViewBag.fecha = oUseraux.fecha_nacimiento.ToString("dd/MM/yyyy");
+            int? id = oUseraux.id_cliente;
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            cliente cliente = db.cliente.Find(id);
+            if (cliente == null)
+            {
+                return HttpNotFound();
+            }
             ViewBag.Nombre = oUseraux.nom_cliente;
-            return View();
+            ViewBag.saldo = oUser.saldo;
+            return View(cliente);
         }
 
         // GET: Bitacora

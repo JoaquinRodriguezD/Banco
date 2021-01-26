@@ -22,13 +22,13 @@
                 <div class="col-lg-6 col-lg-offset-3">
                     <label>
                         Número de cuenta:
-                        <input type="text" name="No_cuenta" onkeypress="return isNumberKey(event, this)" required />
+                        <input type="text" name="No_cuenta" onkeypress="return maxlength="8" isNumberKey(event, this)" required />
                     </label>
                     <label>
                         Nip:
-                        <i id="pass-status" class="fa fa-eye" aria-hidden="true" onClick="viewPassword()"></i>
-                        <input type="password" id="nip" name="Nip" onkeypress="return isNumberKey(event, this)" required />
-                    </label>
+                        <span style="margin-left:140px; position:absolute; bottom:40%; top:40%" id="pass-status" class="fa fa-eye" aria-hidden="true" onClick="viewPassword()"></span>
+                        <input type="password" id="nip" name="Nip" onkeypress="return maxlength="4" isNumberKey(event, this)" required />
+                    </label>                    
                     <div class="text-center">
                         Eres nuevo? Registrate @Html.ActionLink("aquí", "CreateCliente", "Access")
                     </div>
@@ -39,7 +39,6 @@
         </div>
     </div>
 </div>
-
 <div class="row">
     <div class="col-sm-3" id="inicio">
         <h2>Seguridad</h2>
@@ -93,6 +92,5 @@
     })
     </script>
 }
-
 <link href="~/CSS/Login.css" rel="stylesheet" />
-<script src="~/Js/Validations.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />

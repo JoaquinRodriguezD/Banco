@@ -37,6 +37,13 @@
     margin-left: 8px;
     margin-right:10px;
 }
+span {
+    position: absolute;
+    right: 15px;
+    transform: translate(0,-50%);
+    top: 50%;
+    cursor: pointer;
+}
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {

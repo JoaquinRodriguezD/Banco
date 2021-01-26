@@ -129,7 +129,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccessController.cs" />
-    <Compile Include="Controllers\clientesController.cs" />
     <Compile Include="Controllers\CloseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\VerifySession.cs" />
@@ -224,11 +223,7 @@
     <Content Include="Views\Home\Retiro.cshtml" />
     <Content Include="Views\Home\Transferencia.cshtml" />
     <Content Include="Views\Access\CreateCliente.cshtml" />
-    <Content Include="Views\clientes\Create.cshtml" />
-    <Content Include="Views\clientes\Delete.cshtml" />
     <Content Include="Views\Access\Details.cshtml" />
-    <Content Include="Views\clientes\Index.cshtml" />
-    <Content Include="Views\clientes\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
