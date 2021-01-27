@@ -1,0 +1,66 @@
+﻿@model Banco.Models.cliente
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>cliente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nom_cliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom_cliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.a_paterno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.a_paterno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.a_materno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.a_materno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_nacimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_nacimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cuenta.token)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cuenta.token)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_cliente }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

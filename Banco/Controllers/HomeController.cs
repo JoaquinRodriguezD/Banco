@@ -17,11 +17,14 @@ namespace Banco.Controllers
         {
             BancoEntities db = new BancoEntities();
             var oUser = (cuenta)HttpContext.Session["user"];
+            var lst2 = from d in db.cuenta
+                       where d.no_cuenta == oUser.no_cuenta
+                       select d;
+            cuenta oUseraux2 = lst2.First();
             var lst = from d in db.cliente
                       where d.no_cuenta == oUser.no_cuenta
                       select d;
             cliente oUseraux = lst.First();
-            ViewBag.fecha = oUseraux.fecha_nacimiento.ToString("dd/MM/yyyy");
             int? id = oUseraux.id_cliente;
             if (id == null)
             {
@@ -32,8 +35,9 @@ namespace Banco.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.fecha = oUseraux.fecha_nacimiento.ToString("dd/MM/yyyy");
             ViewBag.Nombre = oUseraux.nom_cliente;
-            ViewBag.saldo = oUser.saldo;
+            ViewBag.saldo = oUseraux2.saldo;
             return View(cliente);
         }
 

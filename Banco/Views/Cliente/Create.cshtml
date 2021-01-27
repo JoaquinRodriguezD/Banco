@@ -1,0 +1,43 @@
+﻿@model Banco.Models.cliente
+
+@{
+    ViewBag.Title = "Crear cuenta";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>Ingresa tus datos</h4>
+<div id="divRight">
+    @using (Html.BeginForm("Create", "Cliente", FormMethod.Post))
+    {
+        <br />
+        <span>Nombre:</span> <p></p>
+        <input type="text" name="nom_cliente" maxlength="35" required /><p></p>
+        <span>Apellido Paterno:</span> <p></p>
+        <input type="text" name="a_paterno" maxlength="35" required /><p></p>
+        <span>Apellido Materno:</span> <p></p>
+        <input type="text" name="a_materno" maxlength="35" required /><p></p>
+        <span>Teléfono:</span> <p></p>
+        <input type="text" name="telefono" onkeypress="return isNumberKey(event, this)" maxlength="12" required /><p></p>
+        <span>Fecha de nacimiento:</span> <p></p>
+        <input type="date" name="fecha_nacimiento" min="2003-12-31" max="1903-01-01" required /><p></p>
+        <span>Nip:</span><p></p>
+        <input type="password" id="nip" name="nip" onkeypress="return isNumberKey(event, this)" maxlength="4" size="4" required />
+        <i id="pass-status" class="fa fa-eye" aria-hidden="true" onClick="viewPassword()"></i>
+        <h6>*Debe contener 4 digitos</h6><p></p>
+        <!--
+        <span>Confirmar Nip:</span><p></p>
+        <input type="password" id="nip_confirmar" onkeypress="return isNumberKey(event, this)" maxlength="4" size="4" required />
+        <i id="pass-status2" class="fa fa-eye" aria-hidden="true" onClick="viewPassword2()"></i><p></p>
+        -->
+        <input type="submit" value="Confirmar" />
+        <br />
+    }
+</div>
+
+
+<div>
+    @Html.ActionLink("Regresar", "Index", "Access")
+</div>
+<script src="~/Js/Validations.js"></script>
+<link href="~/CSS/StyleSheet.css" rel="stylesheet" />

@@ -22,13 +22,13 @@
                 <div class="col-lg-6 col-lg-offset-3">
                     <label>
                         Número de cuenta:
-                        <input type="text" name="No_cuenta" onkeypress="return maxlength="8" isNumberKey(event, this)" required />
+                        <input type="text" name="No_cuenta" maxlength="8" onkeypress="return isNumberKey(event, this)" required />
                     </label>
                     <label>
                         Nip:
-                        <span style="margin-left:140px; position:absolute; bottom:40%; top:40%" id="pass-status" class="fa fa-eye" aria-hidden="true" onClick="viewPassword()"></span>
-                        <input type="password" id="nip" name="Nip" onkeypress="return maxlength="4" isNumberKey(event, this)" required />
-                    </label>                    
+                        <span style="position: absolute; top: 45%; right: -14%" id="pass-status" class="fa fa-eye" aria-hidden="true" onClick="viewPassword()"></span>
+                        <input type="password" id="nip" name="Nip" maxlength="4" onkeypress="return isNumberKey(event, this)" required />
+                    </label>
                     <div class="text-center">
                         Eres nuevo? Registrate @Html.ActionLink("aquí", "CreateCliente", "Access")
                     </div>
@@ -43,7 +43,11 @@
     <div class="col-sm-3" id="inicio">
         <h2>Seguridad</h2>
         <p class="text-justify">
-            La combinación de usuario y clave protegen el área privada del sitio Internet,
+            La combinación de usuario y clave protegen el área privada del sitio Internet,No solo es necesario
+            saber cuáles son los datos más sensibles, los que nunca hay que comentar, sino qué alternativas
+            ofrecen bancos para garantizar que las las transacciones sean seguras. La economía se dirige hacia
+            la digitalización. Ofrecen alternativas de pagos online, inmediatos, dependientes tan solo de claves
+            y autorizaciones; pero ¿cómo habituarse a las nuevas tecnologías sin sentir poner datos en peligro?
         </p>
     </div>
     <div class="col-sm-3" id="inicio">
